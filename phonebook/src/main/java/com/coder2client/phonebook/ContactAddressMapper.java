@@ -5,6 +5,7 @@ public class ContactAddressMapper {
 
     public static ContactAddressDTO mapToDTO(ContactAddress contactAddress){
         return ContactAddressDTO.builder()
+                .id(contactAddress.getId())
                 .firstName(contactAddress.getFirstName())
                 .lastName(contactAddress.getLastName())
                 .otherName(contactAddress.getOtherName())
@@ -16,6 +17,7 @@ public class ContactAddressMapper {
 
     public static ContactAddress mapToEntity(ContactAddressDTO contactAddressDTO){
         return ContactAddress.builder()
+                .id(contactAddressDTO.getId())
                 .firstName(contactAddressDTO.getFirstName())
                 .lastName(contactAddressDTO.getLastName())
                 .otherName(contactAddressDTO.getOtherName())

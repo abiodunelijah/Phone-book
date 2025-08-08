@@ -24,8 +24,16 @@ public class ContactAddressController {
     }
 
     @GetMapping("/all-contacts")
+    //url http://localhost:8080/all-contacts
     public ResponseEntity<List<ContactAddressDTO>> getAllContactAddresses(){
         List<ContactAddressDTO> allContactAddresses = contactAddressService.getAllContactAddresses();
         return new ResponseEntity<>(allContactAddresses, HttpStatus.OK);
     }
+
+    @GetMapping("/contact-address/{id}")
+    public ResponseEntity<ContactAddressDTO> getContactAddress(@PathVariable Long id){
+        ContactAddressDTO contactAddress = contactAddressService.getContactAddress(id);
+        return new ResponseEntity<>(contactAddress, HttpStatus.OK);
+    }
+
 }

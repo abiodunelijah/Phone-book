@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,5 +37,12 @@ public class ContactAddressServiceImpl implements ContactAddressService {
         return contactAddresses.stream()
                 .map(ContactAddressMapper::mapToDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public ContactAddressDTO getContactAddress(Long contactId) {
+        ContactAddress address = contactAddressRepository.findById(contactId)
+                .orElseThrow(()-> new ResourceNotFoundException("Contact Address", "ID", contactId));
+        return ContactAddressMapper.mapToDTO(address);
     }
 }
