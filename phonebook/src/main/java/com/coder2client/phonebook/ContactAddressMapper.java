@@ -3,7 +3,7 @@ package com.coder2client.phonebook;
 
 public class ContactAddressMapper {
 
-    public ContactAddressDTO mapToDTO(ContactAddress contactAddress){
+    public static ContactAddressDTO mapToDTO(ContactAddress contactAddress){
         return ContactAddressDTO.builder()
                 .firstName(contactAddress.getFirstName())
                 .lastName(contactAddress.getLastName())
@@ -14,7 +14,7 @@ public class ContactAddressMapper {
                 .build();
     }
 
-    public ContactAddress mapToEntity(ContactAddressDTO contactAddressDTO){
+    public static ContactAddress mapToEntity(ContactAddressDTO contactAddressDTO){
         return ContactAddress.builder()
                 .firstName(contactAddressDTO.getFirstName())
                 .lastName(contactAddressDTO.getLastName())

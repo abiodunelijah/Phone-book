@@ -1,7 +1,10 @@
 package com.coder2client.phonebook;
 
-import org.springframework.stereotype.Service;
 
-@Service
-public class ContactAddressService {
+import java.util.List;
+
+public interface ContactAddressService {
+
+    ContactAddressDTO createContact(ContactAddressDTO contactAddressDTO);
+    List<ContactAddressDTO> getAllContactAddresses();
 }

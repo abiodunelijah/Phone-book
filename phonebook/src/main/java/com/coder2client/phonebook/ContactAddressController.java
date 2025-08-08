@@ -1,0 +1,31 @@
+package com.coder2client.phonebook;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/v1/contacts")
+public class ContactAddressController {
+
+    private final ContactAddressService contactAddressService;
+
+    public ContactAddressController(ContactAddressService contactAddressService) {
+        this.contactAddressService = contactAddressService;
+    }
+
+    @PostMapping("/create-contact")
+    //url http://localhost:8080/create-contact
+    public ResponseEntity<ContactAddressDTO> createContact(@RequestBody ContactAddressDTO contactAddressDTO){
+        ContactAddressDTO contact = contactAddressService.createContact(contactAddressDTO);
+        return new ResponseEntity<>(contact, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/all-contacts")
+    public ResponseEntity<List<ContactAddressDTO>> getAllContactAddresses(){
+        List<ContactAddressDTO> allContactAddresses = contactAddressService.getAllContactAddresses();
+        return new ResponseEntity<>(allContactAddresses, HttpStatus.OK);
+    }
+}
