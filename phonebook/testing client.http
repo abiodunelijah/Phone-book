@@ -1,3 +1,22 @@
+GET http://localhost:8080/api/v1/contacts/search-contact?email=sam@mail.com&phoneNumber=8858473879
+Accept: application/json
+
+###
+DELETE http://localhost:8080/api/v1/contacts/delete-contact/1
+Accept: application/json
+
+###
+
+PATCH http://localhost:8080/api/v1/contacts/update-contact/1
+Content-Type: application/json
+
+{
+  "firstName": "Name changed",
+  "address": "Also changed"
+}
+
+###
+
 GET http://localhost:8080/api/v1/contacts/contact-address/2
 Accept: application/json
 
@@ -12,12 +31,12 @@ POST http://localhost:8080/api/v1/contacts/create-contact
 Content-Type: application/json
 
 {
-  "firstName": "Mark",
-  "lastName" : "Alfred",
-  "otherName": "Veronica",
-  "email": "markveronica@mail.com",
-  "phoneNumber": "9087644322",
-  "address": "London"
+  "firstName": "Sam",
+  "lastName" : "Barth",
+  "otherName": "Howels",
+  "email": "sam@mail.com",
+  "phoneNumber": "0807644322",
+  "address": "Abuja"
 }
 
 <> 2025-08-08T074635.201.json
