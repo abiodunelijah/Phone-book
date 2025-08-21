@@ -1,54 +1,92 @@
-GET http://localhost:8080/api/v1/contacts/search-contact?email=sam@mail.com&phoneNumber=8858473879
-Accept: application/json
+# Authentication Testing
 
-###
-DELETE http://localhost:8080/api/v1/contacts/delete-contact/1
-Accept: application/json
+### Test auth endpoint
+GET http://localhost:8080/api/v1/auth/test
 
-###
-
-PATCH http://localhost:8080/api/v1/contacts/update-contact/1
+### Register a new user
+POST http://localhost:8080/api/v1/auth/register
 Content-Type: application/json
 
 {
-  "firstName": "Name changed",
-  "address": "Also changed"
+  "firstName": "John",
+  "lastName": "Doe",
+  "username": "johndoe",
+  "email": "john.doe@example.com",
+  "password": "password123",
+  "role": "USER"
 }
 
-###
+### Register an admin user
+POST http://localhost:8080/api/v1/auth/register
+Content-Type: application/json
 
-GET http://localhost:8080/api/v1/contacts/contact-address/2
-Accept: application/json
+{
+  "firstName": "Admin",
+  "lastName": "User",
+  "username": "admin",
+  "email": "admin@example.com",
+  "password": "admin123",
+  "role": "ADMIN"
+}
 
-<> 2025-08-08T101007.200.json
-<> 2025-08-08T100722.404.json
-<> 2025-08-08T092729.500.json
-<> 2025-08-08T092715.200.json
-<> 2025-08-08T092651.200.json
+### Login as regular user
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
 
-###
+{
+  "username": "johndoe",
+  "password": "password123"
+}
+
+### Login as admin
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin123"
+}
+
+### Create contact (requires authentication)
 POST http://localhost:8080/api/v1/contacts/create-contact
 Content-Type: application/json
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
 
 {
-  "firstName": "Sam",
-  "lastName" : "Barth",
-  "otherName": "Howels",
-  "email": "sam@mail.com",
-  "phoneNumber": "0807644322",
-  "address": "Abuja"
+  "firstName": "Jane",
+  "lastName": "Smith",
+  "otherName": "Marie",
+  "email": "jane.smith@example.com",
+  "phoneNumber": "1234567890",
+  "address": "123 Main St, City, State"
 }
 
-<> 2025-08-08T074635.201.json
-<> 2025-08-08T072821.200.json
-<> 2025-08-08T072717.200.json
-<> 2025-08-08T072404.404.json
-<> 2025-08-08T072314.404.json
-
-###
+### Get all contacts (user's own contacts)
 GET http://localhost:8080/api/v1/contacts/all-contacts
-Accept: application/json
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
 
-<> 2025-08-08T074706.200.json
+### Get all contacts (admin only)
+GET http://localhost:8080/api/v1/contacts/admin/all-contacts
+Authorization: Bearer YOUR_ADMIN_JWT_TOKEN_HERE
 
-###
+### Get specific contact
+GET http://localhost:8080/api/v1/contacts/contact-address/1
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+### Update contact
+PATCH http://localhost:8080/api/v1/contacts/update-contact/1
+Content-Type: application/json
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+{
+  "firstName": "Jane Updated",
+  "address": "456 New Address St"
+}
+
+### Delete contact (admin only)
+DELETE http://localhost:8080/api/v1/contacts/delete-contact/1
+Authorization: Bearer YOUR_ADMIN_JWT_TOKEN_HERE
+
+### Search contacts
+GET http://localhost:8080/api/v1/contacts/search-contact?firstName=Jane&email=jane
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
