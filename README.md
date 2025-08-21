@@ -67,8 +67,8 @@ The application uses MySQL database with the following default configuration:
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/phonebook
-spring.datasource.username=coder2client
-spring.datasource.password=pastoral2u
+spring.datasource.username=root
+spring.datasource.password=password
 spring.jpa.hibernate.ddl-auto=update
 ```
 
