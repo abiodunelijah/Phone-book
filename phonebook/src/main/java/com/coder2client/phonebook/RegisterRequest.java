@@ -1,3 +1,6 @@
+
+package com.coder2client.phonebook.security.dto;
+
 import com.coder2client.phonebook.security.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
